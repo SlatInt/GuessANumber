@@ -42,7 +42,7 @@ checkBtn.addEventListener("click", () => {
   if (guessValue == mysteryNumber) {
     statusMessage.textContent = `Bullseye!`;
     randomNrPlaceholder.textContent = mysteryNumber;
-    scoreFld.textContent = Number(scoreFld.textContent) + 2;
+    scoreFld.textContent = Number(scoreFld.textContent) + 4;
     Number(scoreFld.textContent) > Number(highscoreFld.textContent)
       ? (highscoreFld.textContent = Number(scoreFld.textContent))
       : (highscoreFld.textContent = Number(highscoreFld.textContent));
