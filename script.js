@@ -9,6 +9,10 @@ const guessInput = document.querySelector(".guess");
 const highscoreFld = document.querySelector(".highscore");
 const statusMessage = document.querySelector(".message");
 const numbersRangePar = document.querySelector(".between");
+const modalRules = document.querySelector('.modal');
+const modalOverlay = document.querySelector('.overlay');
+const modalClose = document.querySelector('.close-modal');
+const modalOpen = document.querySelector('.show-modal');
 
 //Other variables
 let mysteryNumber = Number;
@@ -28,15 +32,15 @@ const genRandomNumber = function (min, max) {
   min = Math.ceil(min);
   max = Math.ceil(max);
   mysteryNumber = Math.floor(Math.random() * (max - min + 1) + min);
-  // console.log(mysteryNumber);
+  console.log(mysteryNumber);
   return mysteryNumber;
 };
 
 //Value/style changing functions (F)
-//F to toggle target button visibility
-const toggleBtn = function (btnName) {
-  btnName.classList.toggle("turnedoff");
-};
+//Show or hide element (working for modal or btn) 
+const toggleHidden = function(elemName) {
+  elemName.classList.toggle('hidden');
+}
 
 //F changing input border colors
 const colorBorders = function (newColor) {
@@ -73,8 +77,8 @@ againBtn.addEventListener("click", () => {
     modMessage(`Start guessing...!`),
     (guessInput.value = null),
     modNumberBox(`?`);
-  toggleBtn(checkBtn);
-  toggleBtn(againBtn);
+  toggleHidden(checkBtn);
+  toggleHidden(againBtn);
   colorBorders("#eee");
 });
 
@@ -89,8 +93,8 @@ checkBtn.addEventListener("click", () => {
     modNumberBox(`${mysteryNumber}`);
     modScore(pointsUp);
     highscoreUpdate();
-    toggleBtn(checkBtn);
-    toggleBtn(againBtn);
+    toggleHidden(checkBtn);
+    toggleHidden(againBtn);
   }
   //no number is given in the input field
   else if (guessValue == "") {
@@ -110,3 +114,20 @@ checkBtn.addEventListener("click", () => {
         modScore(startingScore));
   }
 });
+
+//Show or hide modal with rules of the game
+modalOpen.addEventListener('click', function() {
+  toggleHidden(modalRules);
+  toggleHidden(modalOverlay);
+}
+);
+modalClose.addEventListener('click', function() {
+  toggleHidden(modalRules);
+  toggleHidden(modalOverlay);
+}
+);
+modalOverlay.addEventListener('click', function() {
+  toggleHidden(modalRules);
+  toggleHidden(modalOverlay);
+}
+);

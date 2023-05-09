@@ -56,6 +56,11 @@ h1 {
   transform: translate(-50%, -50%);
 }
 
+h2 {
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+}
+
 .number {
   background: #eee;
   color: #333;
@@ -118,4 +123,51 @@ h1 {
   padding: 0px;
   margin: 0px;
   overflow: hidden;
+}
+/* /////////////////////// */
+/* Modal pop-up with rules */
+.show-modal {
+  margin: 2rem 2rem;
+  border: none;
+  cursor: pointer;
+}
+
+.close-modal {
+  position: absolute;
+  top: 1.2rem;
+  right: 2rem;
+  font-size: 5rem;
+  color: #eee;
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+.hidden {
+  display: none;
+}
+
+.modal {
+  position: absolute;
+  line-height: 2em;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 40%;
+  background-color: #222;
+  padding: 6rem;
+  border-radius: 5px;
+  box-shadow: 0 0 10rem #eee;
+  z-index: 10;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #eeeeee50;
+  backdrop-filter: blur(3px);
+  z-index: 5;
 }

@@ -11,6 +11,7 @@
 <body>
     <header>    
         <h1>Guessing random numbers</h1>
+        <button class="btn show-modal">Rules</button>
         <p class="between">Between 1 and 20</p>
         <div class="number">?</div>
     </header>
@@ -18,7 +19,7 @@
     <section class="left">
         <input type="number" class="guess" placeholder="..." min="1" max="20">
         <button class="btn check">Check!</button>
-        <button class="btn again turnedoff">Again!</button>
+        <button class="btn again hidden">Again!</button>
     </section>
     <section class="right">
         <p class="message">
@@ -31,6 +32,16 @@
             Highscore: <span class="highscore">0</span>
         </p>
     </section>
+    <div class="modal hidden">
+        <button class="close-modal">&times;</button>
+        <h2>Rules of the game</h2>
+        <p>
+            A simple game of guessing random numbers from set range 1 to 20. <br>
+            There is no way of losing here, the idea is to get the highest score possible. <br>
+            Numbers of points for finding a number is set to 4 and for missing to -1, so it's really hard to stay at 0 points (by using binary search ie.).
+        </p>
+      </div>
+      <div class="overlay hidden"></div>
 </main>
     <script src="script.js"></script>
 </body>
