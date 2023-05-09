@@ -131,3 +131,16 @@ modalOverlay.addEventListener('click', function() {
   toggleHidden(modalOverlay);
 }
 );
+
+//Hide modal on esc clicked
+document.addEventListener('keydown', function(e) {
+  if (e.key === "Escape") {
+    if (!modalRules.classList.contains('hidden') && !modalOverlay.classList.contains('hidden')) {
+      toggleHidden(modalRules);
+      toggleHidden(modalOverlay);
+    }
+  }
+}
+)
+
+//If enter is down, run check click event
