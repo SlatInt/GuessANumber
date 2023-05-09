@@ -9,10 +9,10 @@ const guessInput = document.querySelector(".guess");
 const highscoreFld = document.querySelector(".highscore");
 const statusMessage = document.querySelector(".message");
 const numbersRangePar = document.querySelector(".between");
-const modalRules = document.querySelector('.modal');
-const modalOverlay = document.querySelector('.overlay');
-const modalClose = document.querySelector('.close-modal');
-const modalOpen = document.querySelector('.show-modal');
+const modalRules = document.querySelector(".modal");
+const modalOverlay = document.querySelector(".overlay");
+const modalClose = document.querySelector(".close-modal");
+const modalOpen = document.querySelector(".show-modal");
 
 //Other variables
 let mysteryNumber = Number;
@@ -37,14 +37,24 @@ const genRandomNumber = function (min, max) {
 };
 
 //Value/style changing functions (F)
-//Show or hide element (working for modal or btn) 
-const toggleHidden = function(elemName) {
-  elemName.classList.toggle('hidden');
-}
+//Show or hide element (working for modal or btn)
+const toggleHidden = function (elemName) {
+  elemName.classList.toggle("hidden");
+};
 
 //F changing input border colors
-const colorBorders = function (newColor) {
-  guessInput.style.border = `4px solid ${newColor}`;
+const bordersRecolor = function (elemName, newColor) {
+  elemName.style.border = `4px solid ${newColor}`;
+};
+
+//F changing input border colors
+const backgroundRecolor = function (elemName, newColor) {
+  elemName.style.backgroundColor = `${newColor}`;
+};
+
+//F changing input border colors
+const fontRecolor = function (elemName, newColor) {
+  elemName.style.color = `${newColor}`;
 };
 
 //F change text content of "mystery number box"
@@ -77,32 +87,38 @@ againBtn.addEventListener("click", () => {
     modMessage(`Start guessing...!`),
     (guessInput.value = null),
     modNumberBox(`?`);
+  bordersRecolor(guessInput, "#eee");
+  backgroundRecolor(numberBox, "#eee");
+  fontRecolor(numberBox, "#222");
   toggleHidden(checkBtn);
   toggleHidden(againBtn);
-  colorBorders("#eee");
 });
 
 //On clicking Check
 checkBtn.addEventListener("click", () => {
-  colorBorders("#eee");
+  bordersRecolor(guessInput, "#eee");
   const guessValue = guessInput.value;
   // the number is correctly guessed
   if (guessValue == mysteryNumber) {
     modMessage(`Bullseye!`);
-    colorBorders("#60b347");
+    bordersRecolor(guessInput, "#60b347");
+    fontRecolor(numberBox, "#eee");
     modNumberBox(`${mysteryNumber}`);
     modScore(pointsUp);
     highscoreUpdate();
+    backgroundRecolor(numberBox, "#60b347");
     toggleHidden(checkBtn);
     toggleHidden(againBtn);
   }
   //no number is given in the input field
   else if (guessValue == "") {
     modMessage(`Choose a number first!`);
-    colorBorders("#cc2020");
+    bordersRecolor(guessInput, "#cc2020");
   }
   //missed the number; either too high or too low
   else {
+    backgroundRecolor(numberBox, "#cc2020");
+    fontRecolor(numberBox, "#eee");
     if (guessValue < mysteryNumber) {
       modMessage(`Nope, try higher.`);
     } else {
@@ -116,31 +132,46 @@ checkBtn.addEventListener("click", () => {
 });
 
 //Show or hide modal with rules of the game
-modalOpen.addEventListener('click', function() {
+modalOpen.addEventListener("click", function () {
   toggleHidden(modalRules);
   toggleHidden(modalOverlay);
-}
-);
-modalClose.addEventListener('click', function() {
+});
+modalClose.addEventListener("click", function () {
   toggleHidden(modalRules);
   toggleHidden(modalOverlay);
-}
-);
-modalOverlay.addEventListener('click', function() {
+});
+modalOverlay.addEventListener("click", function () {
   toggleHidden(modalRules);
   toggleHidden(modalOverlay);
-}
-);
+});
 
+//Document wide events
 //Hide modal on esc clicked
-document.addEventListener('keydown', function(e) {
+document.addEventListener("keydown", function (e) {
   if (e.key === "Escape") {
-    if (!modalRules.classList.contains('hidden') && !modalOverlay.classList.contains('hidden')) {
+    if (
+      !modalRules.classList.contains("hidden") &&
+      !modalOverlay.classList.contains("hidden")
+    ) {
       toggleHidden(modalRules);
       toggleHidden(modalOverlay);
     }
   }
-}
-)
+});
 
 //If enter is down, run check click event
+document.addEventListener("keydown", function (e) {
+  if (e.key == "Enter") {
+    if (
+      guessInput === document.activeElement &&
+      !checkBtn.classList.contains("hidden")
+    ) {
+      checkBtn.click();
+    } else if (
+      guessInput === document.activeElement &&
+      checkBtn.classList.contains("hidden")
+    ) {
+      againBtn.click();
+    }
+  }
+});
