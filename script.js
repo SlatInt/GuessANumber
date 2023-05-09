@@ -47,7 +47,7 @@ againBtn.addEventListener("click", () => {
 //On clicking Check
 checkBtn.addEventListener("click", () => {
   const guessValue = Number(guessInput.value);
-  // guessInput.style.border = "4px solid #eee";
+  // the number is correctly guessed
   if (guessValue == mysteryNumber) {
     statusMessage.textContent = `Bullseye!`;
     guessInput.style.border = "4px solid #60b347";
@@ -58,10 +58,14 @@ checkBtn.addEventListener("click", () => {
       : (highscoreFld.textContent = Number(highscoreFld.textContent));
       checkBtn.classList.toggle("turnedoff");
       againBtn.classList.toggle("turnedoff");
-  } else if (guessValue == "") {
+  } 
+  //no number is given in the input field
+  else if (guessValue == "") {
     statusMessage.textContent = `Choose a number first!`;
     guessInput.style.border = "4px solid #cc2020";
-  } else {
+  } 
+  //missed the number; either too high or too low
+  else {
     guessValue < mysteryNumber
       ? (statusMessage.textContent = `Nope, try higher.`)
       : (statusMessage.textContent = `Nope, try lower.`);
